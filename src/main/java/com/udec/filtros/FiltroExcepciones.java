@@ -24,8 +24,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import com.udec.dto.ErrorDto;
 
-//@ControllerAdvice
-//@RestController
+@ControllerAdvice
+@RestController
 public class FiltroExcepciones extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(ModelNotFoundException.class)
@@ -36,7 +36,7 @@ public class FiltroExcepciones extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ErrorDto>(error, status);
 	}
 	
-	/*
+	
 	@ExceptionHandler(SQLException.class)
 	public final ResponseEntity<ErrorDto> SQLExceptionHandler(WebRequest request, SQLException ex){
 		ex.printStackTrace();
@@ -44,7 +44,6 @@ public class FiltroExcepciones extends ResponseEntityExceptionHandler {
 		ErrorDto error = new ErrorDto(status.toString(), status.value() , ex.getMessage(), ((ServletWebRequest)request).getRequest().getRequestURI().toString());
 		return new ResponseEntity<ErrorDto>(error, status);
 	}
-	*/
 	
 	@ExceptionHandler(FileNotFoundException.class)
 	public final ResponseEntity<ErrorDto> FileNotFoundExceptionHandler(WebRequest request, FileNotFoundException ex){

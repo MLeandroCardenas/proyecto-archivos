@@ -56,10 +56,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	        try {
 	            conn = DriverManager.getConnection(url, user, password);
 	        } catch (SQLException e) {
-	        	e.getStackTrace();
-	        	e.getCause();
-	        	e.getMessage();
-	        	//throw new SQLException("No se pudo conectar a la base de datos");
+	        	throw new SQLException("No se pudo conectar a la base de datos");
 	        }
 	        return conn;
 	}
@@ -76,10 +73,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 			query.executeUpdate();
 			query.close();
 		} catch (SQLException e) {
-			e.getStackTrace();
-        	e.getCause();
-        	e.getMessage();
-			//throw new SQLException("No se pudo conectar a la base de datos");
+			throw new SQLException("No se pudo conectar a la base de datos");
 		}
 	}
 	
@@ -100,10 +94,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 			resulSet.close();
 			conn.close();
 		} catch (SQLException e) {
-			e.getStackTrace();
-        	e.getCause();
-        	e.getMessage();
-			//throw new SQLException("No se pudo conectar a la base de datos");
+			throw new SQLException("No se pudo conectar a la base de datos");
 		}
 		return listaAlumno;
 	}
