@@ -24,8 +24,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import com.udec.dto.ErrorDto;
 
-@ControllerAdvice
-@RestController
+//@ControllerAdvice
+//@RestController
 public class FiltroExcepciones extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(ModelNotFoundException.class)
