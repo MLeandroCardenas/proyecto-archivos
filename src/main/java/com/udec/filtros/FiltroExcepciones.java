@@ -36,6 +36,7 @@ public class FiltroExcepciones extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ErrorDto>(error, status);
 	}
 	
+	/*
 	@ExceptionHandler(SQLException.class)
 	public final ResponseEntity<ErrorDto> SQLExceptionHandler(WebRequest request, SQLException ex){
 		ex.printStackTrace();
@@ -43,6 +44,7 @@ public class FiltroExcepciones extends ResponseEntityExceptionHandler {
 		ErrorDto error = new ErrorDto(status.toString(), status.value() , ex.getMessage(), ((ServletWebRequest)request).getRequest().getRequestURI().toString());
 		return new ResponseEntity<ErrorDto>(error, status);
 	}
+	*/
 	
 	@ExceptionHandler(FileNotFoundException.class)
 	public final ResponseEntity<ErrorDto> FileNotFoundExceptionHandler(WebRequest request, FileNotFoundException ex){
