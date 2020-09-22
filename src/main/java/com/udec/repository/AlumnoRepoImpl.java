@@ -22,7 +22,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 
 	
 	private final String rutaFichero = "alumno.txt";
-	private final String url = "jdbc:postgresql://postgres://uffwdowxltlinq:b440c1e2b86259a6f742f6d9722a7ad7a1021d47f56848d0a18f820ffe88710b@ec2-34-234-185-150.compute-1.amazonaws.com:5432/d8rqmiutr18q6i"; 
+	private final String url = "postgres://uffwdowxltlinq:b440c1e2b86259a6f742f6d9722a7ad7a1021d47f56848d0a18f820ffe88710b@ec2-34-234-185-150.compute-1.amazonaws.com:5432/d8rqmiutr18q6i"; 
     private final String user = "uffwdowxltlinq";
     private final String password = "b440c1e2b86259a6f742f6d9722a7ad7a1021d47f56848d0a18f820ffe88710b";
 	private List<AlumnoDto> listaAlumno;
