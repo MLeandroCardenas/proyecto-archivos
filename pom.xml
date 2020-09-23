@@ -44,8 +44,9 @@
 		</dependency>
 		 
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-jdbc</artifactId>
+			    <groupId>postgresql</groupId>
+			    <artifactId>postgresql</artifactId>
+			    <version>9.1-901.jdbc4</version>
 			</dependency>
 		 
 		<dependency>
