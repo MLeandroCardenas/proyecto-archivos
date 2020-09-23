@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.udec.dto.AlumnoDto;
 
@@ -45,8 +45,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	AlumnoDto al;
 	
 	@Autowired
-	private JdbcTemplateAutoConfiguration conn;
-	
+	JdbcTemplate conn;
 	
 	@Autowired
 	public AlumnoRepoImpl(List<AlumnoDto> listaAlumno, List<AlumnoDto> serializar, List<AlumnoDto> deserializar) {
@@ -71,7 +70,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	@Override
 	public void insertarAlumnoDB(AlumnoDto alumno) throws SQLException {
 		try {
-			
+			//Connection conn = conexionDB();
 			PreparedStatement query = ((Connection) conn).prepareStatement("insert into alumnos(id,nombres,universidad,edad) values(?, ?, ?, ?)");
 			query.setInt(1, alumno.getId());
 			query.setString(2, alumno.getNombres());
@@ -87,6 +86,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	@Override
 	public List<AlumnoDto> recuperarAlumnosDB() throws SQLException {
 		try {
+			//Connection conn = conexionDB();
 			PreparedStatement preparedStatement = ((Connection) conn).prepareStatement("select * from alumnos");
 			ResultSet resulSet = preparedStatement.executeQuery();
 			while(resulSet.next()) {
