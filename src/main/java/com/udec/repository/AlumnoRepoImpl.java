@@ -68,6 +68,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	@Override
 	public void insertarAlumnoDB(AlumnoDto alumno) throws SQLException {
 		try {
+			Class.forName(driver);
 			Connection conn = conexionDB();
 			PreparedStatement query = conn.prepareStatement("insert into alumnos(id,nombres,universidad,edad) values(?, ?, ?, ?)");
 			query.setInt(1, alumno.getId());
@@ -78,6 +79,8 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 			query.close();
 		} catch (SQLException e) {
 			throw new SQLException("No se pudo conectar a la base de datos");
+		}catch (ClassNotFoundException e) {
+			System.out.println("error: " + e.getMessage());
 		}
 	}
 	
