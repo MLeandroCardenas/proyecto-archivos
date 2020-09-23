@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.stereotype.Repository;
 import com.udec.dto.AlumnoDto;
 
@@ -42,6 +44,9 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	
 	AlumnoDto al;
 	
+	@Autowired
+	private JdbcTemplateAutoConfiguration conn;
+	
 	
 	@Autowired
 	public AlumnoRepoImpl(List<AlumnoDto> listaAlumno, List<AlumnoDto> serializar, List<AlumnoDto> deserializar) {
@@ -50,6 +55,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 		this.deserializar = deserializar;
 	}
 	
+	/*
 	@Override
 	public Connection conexionDB() throws SQLException {
 		 Connection conn = null;
@@ -60,12 +66,13 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	        }
 	        return conn;
 	}
+	*/
 	
 	@Override
 	public void insertarAlumnoDB(AlumnoDto alumno) throws SQLException {
 		try {
-			Connection conn = conexionDB();
-			PreparedStatement query = conn.prepareStatement("insert into alumnos(id,nombres,universidad,edad) values(?, ?, ?, ?)");
+			
+			PreparedStatement query = ((Connection) conn).prepareStatement("insert into alumnos(id,nombres,universidad,edad) values(?, ?, ?, ?)");
 			query.setInt(1, alumno.getId());
 			query.setString(2, alumno.getNombres());
 			query.setString(3, alumno.getUniversidad());
@@ -80,8 +87,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	@Override
 	public List<AlumnoDto> recuperarAlumnosDB() throws SQLException {
 		try {
-			Connection conn = conexionDB();
-			PreparedStatement preparedStatement = conn.prepareStatement("select * from alumnos");
+			PreparedStatement preparedStatement = ((Connection) conn).prepareStatement("select * from alumnos");
 			ResultSet resulSet = preparedStatement.executeQuery();
 			while(resulSet.next()) {
 				Integer id = resulSet.getInt("id");
@@ -92,7 +98,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 				listaAlumno.add(objAlumno);
 			}
 			resulSet.close();
-			conn.close();
+			((Connection) conn).close();
 		} catch (SQLException e) {
 			throw new SQLException("No se pudo conectar a la base de datos");
 		}

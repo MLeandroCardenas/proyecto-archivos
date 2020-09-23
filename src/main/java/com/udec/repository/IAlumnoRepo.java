@@ -14,7 +14,7 @@ public interface IAlumnoRepo {
 	
 	List<AlumnoDto> recuperarFichero() throws FileNotFoundException, ClassNotFoundException, IOException;
 	
-	Connection conexionDB() throws SQLException;
+	//Connection conexionDB() throws SQLException;
 	
 	void insertarAlumnoDB(AlumnoDto alumno) throws SQLException;
 	
