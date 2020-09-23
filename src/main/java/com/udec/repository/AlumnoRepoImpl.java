@@ -25,7 +25,7 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	private final String url = "jdbc:postgresql://cymjabwapelcxv:3e44c27dbd211c435b0d214e18654f1bc3ab168d1a0bc4a05e8cce3302871d46@ec2-23-23-36-227.compute-1.amazonaws.com:5432/d4oot6nug17cbu";
 	private final String user = "cymjabwapelcxv";
 	private final String password = "3e44c27dbd211c435b0d214e18654f1bc3ab168d1a0bc4a05e8cce3302871d46";
-    
+	private static final String driver = "org.postgresql.jdbc.Driver";
 
 	//bd local
 	/*
@@ -54,10 +54,13 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	public Connection conexionDB() throws SQLException {
 		 Connection conn = null;
 	        try {
+	        	Class.forName(driver);
 	            conn = DriverManager.getConnection(url, user, password);
 	        } catch (SQLException e) {
 	        	throw new SQLException("No se pudo conectar a la base de datos");
-	        }
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 	        return conn;
 	}
 	
