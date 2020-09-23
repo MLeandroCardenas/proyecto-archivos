@@ -54,13 +54,10 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	public Connection conexionDB() throws SQLException {
 		 Connection conn = null;
 	        try {
-	        	Class.forName(driver);
 	            conn = DriverManager.getConnection(url, user, password);
 	        } catch (SQLException e) {
 	        	throw new SQLException("No se pudo conectar a la base de datos");
-	        } catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+	        }
 	        return conn;
 	}
 	
@@ -81,12 +78,14 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 			throw new SQLException("No se pudo conectar a la base de datos");
 		}catch (ClassNotFoundException e) {
 			System.out.println("error: " + e.getMessage());
+			System.out.println("causa: " + e.getCause());
 		}
 	}
 	
 	@Override
 	public List<AlumnoDto> recuperarAlumnosDB() throws SQLException {
 		try {
+			Class.forName(driver);
 			Connection conn = conexionDB();
 			PreparedStatement preparedStatement = conn.prepareStatement("select * from alumnos");
 			ResultSet resulSet = preparedStatement.executeQuery();
@@ -102,6 +101,9 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 			conn.close();
 		} catch (SQLException e) {
 			throw new SQLException("No se pudo conectar a la base de datos");
+		}catch (ClassNotFoundException e) {
+			System.out.println("error: " + e.getMessage());
+			System.out.println("causa: " + e.getCause());
 		}
 		return listaAlumno;
 	}
