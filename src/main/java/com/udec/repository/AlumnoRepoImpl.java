@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.udec.dto.AlumnoDto;
@@ -53,7 +52,6 @@ public class AlumnoRepoImpl implements IAlumnoRepo {
 	public Connection conexionDB() throws SQLException {
 		 Connection conn = null;
 	        try {
-	        	// Class.forName("com.postgresql.jdbc.Driver");
 	            conn = DriverManager.getConnection(url, user, password);
 	        } catch (SQLException e) {
 	        	throw new SQLException("No se pudo conectar a la base de datos");
